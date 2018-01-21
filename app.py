@@ -2889,6 +2889,17 @@ def user_topic_list(name = None, num = 1):
         menu = [['other', '기타'], ['user', '사용자'], ['count/' + url_pas(name), '횟수']]
     )))
 
+@route('/recent_changes_plain')
+def recent_changes_plain(name=None, num=1, what='all', tool='record'):
+    div = '<table style="width: 100%; text-align: center;"><tbody>'
+
+    curs.execute("select title, date from history order by date desc limit 50")
+    data_list = curs.fetchall()
+    div += '<td>문서제목</td><td>수정시간</td>'
+    for data in data_list:
+        div += '<tr><td><a href="/w/%s">%s</a></td><td>%s</td></tr>' % (data[0],data[0], data[1])
+    return div
+
 @route('/<tool:re:history|record>/<name:path>', method=['POST', 'GET'])
 @route('/<tool:re:history>/<name:path>/num/<num:int>', method=['POST', 'GET'])
 @route('/<tool:re:record>/<name:path>/<what:path>')
