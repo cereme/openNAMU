@@ -56,7 +56,7 @@ def macro(data):
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
     rcdata = requests.get('http://cauis.xyz:3000/recent_changes').text
-    data = re.sub("\[recent_changes\]", rdata, data)
+    data = re.sub("\[recent_changes\]", rcdata, data)
 
     
     while(1):
