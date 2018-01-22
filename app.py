@@ -2891,7 +2891,9 @@ def user_topic_list(name = None, num = 1):
 
 @route('/recent_changes_plain')
 def recent_changes_plain(name=None, num=1, what='all', tool='record'):
-    div = '<table style="width: 100%; text-align: center;"><tbody>'
+    div = '''<link rel="stylesheet" href="/views/acme/css/style.css">
+    <link rel="stylesheet" href="/views/acme/css/style-responsive.css">
+    <table style="width: 100%; text-align: center;border:1px solid #ccc;"><tbody>'''
 
     curs.execute("select title, date from history order by date desc limit 50")
     data_list = curs.fetchall()
@@ -2914,7 +2916,7 @@ def recent_changes(name = None, num = 1, what = 'all', tool = 'record'):
         six_admin = admin_check(conn, 6, None)
         ban = ''
         select = ''
-        div = '<table style="width: 100%; text-align: center; border:1px solid #ccc"><tbody><tr>'
+        div = '<table style="width: 100%; text-align: center;"><tbody><tr>'
         
         if(name):
             if(num * 50 > 0):
