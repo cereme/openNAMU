@@ -2893,7 +2893,7 @@ def user_topic_list(name = None, num = 1):
 def recent_changes_plain(name=None, num=1, what='all', tool='record'):
     div = '''<link rel="stylesheet" href="/views/acme/css/style.css">
     <link rel="stylesheet" href="/views/acme/css/style-responsive.css">
-    <table style="width: 100%; text-align: center;border:1px solid #ccc;"><tbody>'''
+    <table style="width: 100%; text-align: center;border:1px solid #ccc;" class="col-md-10 col-md-offset-1 mar-b-30"><tbody>'''
 
     curs.execute("select title, date from history order by date desc limit 50")
     data_list = curs.fetchall()
