@@ -5,7 +5,6 @@ import time
 import datetime
 import re
 import json
-import requests
 
 session_opts = {
     'session.type': 'dbm',
@@ -20,7 +19,7 @@ def get_time():
     date = "%04d-%02d-%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
 
     return(date)
-    
+
 def ip_check():
     session = request.environ.get('beaker.session')
     try:
@@ -38,29 +37,23 @@ def ip_check():
 
 def savemark(data):
     data = re.sub("\[date\(now\)\]", get_time(), data)
-    
+
     if(not re.search("\.", ip_check())):
         name = '[[사용자:' + ip_check() + '|' + ip_check() + ']]'
     else:
         name = ip_check()
-        
+
     data = re.sub("\[name\]", name, data)
 
     return(data)
 
-def macro(data):      
+def macro(data):
     data = savemark(data)
-    data = re.sub("\[anchor\((?P<in>[^\[\]]*)\)\]", '<span id="\g<in>"></span>', data)          
+    data = re.sub("\[anchor\((?P<in>[^\[\]]*)\)\]", '<span id="\g<in>"></span>', data)
     data = re.sub("\[nicovideo\((?P<in>[^,)]*)(?:(?:,(?:[^,)]*))+)?\)\]", "[[http://embed.nicovideo.jp/watch/\g<in>]]", data)
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
-
-    com = re.compile("\[recent_changes\]")
-    m = com.search(data)
-    if(m):
-        rcdata = requests.get('http://cauis.xyz:3000/recent_changes_plain').text
-        print(rcdata)
-        data = re.sub("\[recent_changes\]", rcdata, data)
+    data = re.sub("\[recent_changes\]", '<iframe src="/recent_changes_plain" frameborder="0" style="width:100%;height:100%">최근변경내역</iframe>', data)
 
     
     while(1):

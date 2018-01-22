@@ -2902,7 +2902,7 @@ def recent_changes_plain(name=None, num=1, what='all', tool='record'):
     data_list = curs.fetchall()
     div += '<td>문서제목</td><td>수정시간</td>'
     for data in data_list:
-        div += '<tr style="border:1px solid #ccc;"><td><a href="/w/%s">%s</a></td><td>%s</td></tr>' % (data[0],data[0], data[1])
+        div += '<tr style="border:1px solid #ccc;"><td><a href="/w/%s" target="_top">%s</a></td><td>%s</td></tr>' % (data[0],data[0], data[1])
     return div
 
 @route('/<tool:re:history|record>/<name:path>', method=['POST', 'GET'])
