@@ -53,7 +53,15 @@ def macro(data):
     data = re.sub("\[nicovideo\((?P<in>[^,)]*)(?:(?:,(?:[^,)]*))+)?\)\]", "[[http://embed.nicovideo.jp/watch/\g<in>]]", data)
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
-    data = re.sub("\[recent_changes\]", '<iframe src="/recent_changes_plain" frameborder="0" style="width:100%;height:100%">최근변경내역</iframe>', data)
+    data = re.sub("\[recent_changes\]", '''<iframe src="/recent_changes_plain" scrolling="no" frameborder="0" style="width:100%;" onload="setIframeHeight(this)">최근변경내역</iframe>
+    <script>
+function setIFrameHeight(obj){
+    if(obj.contentDocument){
+        obj.height = obj.contentDocument.body.offsetHeight + 40;
+    } else {
+        obj.height = obj.contentWindow.document.body.scrollHeight;
+    }
+}</script>''', data)
 
     
     while(1):
