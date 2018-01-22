@@ -3,6 +3,7 @@ from bottle.ext import beaker
 from app import recent_changes_plain
 from urllib import parse
 import time
+import requests
 import datetime
 import re
 import json
@@ -54,7 +55,8 @@ def macro(data):
     data = re.sub("\[nicovideo\((?P<in>[^,)]*)(?:(?:,(?:[^,)]*))+)?\)\]", "[[http://embed.nicovideo.jp/watch/\g<in>]]", data)
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
-    data = re.sub("\[recent_changes\]", recent_changes_plain(), data)
+    rcdata = requests.get('http://cauis.xyz:3000/recent_changes').text
+    data = re.sub("\[recent_changes\]", rdata, data)
 
     
     while(1):
