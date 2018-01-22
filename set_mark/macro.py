@@ -1,6 +1,5 @@
 from bottle import request, app
 from bottle.ext import beaker
-from app import recent_changes_plain
 from urllib import parse
 import time
 import requests
