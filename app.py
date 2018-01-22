@@ -2914,7 +2914,7 @@ def recent_changes(name = None, num = 1, what = 'all', tool = 'record'):
         six_admin = admin_check(conn, 6, None)
         ban = ''
         select = ''
-        div = '<table style="width: 100%; text-align: center;"><tbody><tr>'
+        div = '<table style="width: 100%; text-align: center; border:1px solid #ccc"><tbody><tr>'
         
         if(name):
             if(num * 50 > 0):
