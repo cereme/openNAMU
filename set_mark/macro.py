@@ -58,7 +58,7 @@ def macro(data):
     com = re.compile("\[recent_changes\]")
     m = com.search(data)
     if(m):
-        rcdata = requests.get('http://cauis.xyz:3000/recent_changes').text
+        rcdata = requests.get('http://cauis.xyz:3000/recent_changes_plain').text
         data = re.sub("\[recent_changes\]", rcdata, data)
 
     
