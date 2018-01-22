@@ -2,10 +2,10 @@ from bottle import request, app
 from bottle.ext import beaker
 from urllib import parse
 import time
-import requests
 import datetime
 import re
 import json
+import requests
 
 session_opts = {
     'session.type': 'dbm',
@@ -54,8 +54,12 @@ def macro(data):
     data = re.sub("\[nicovideo\((?P<in>[^,)]*)(?:(?:,(?:[^,)]*))+)?\)\]", "[[http://embed.nicovideo.jp/watch/\g<in>]]", data)
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
-    rcdata = requests.get('http://cauis.xyz:3000/recent_changes').text
-    data = re.sub("\[recent_changes\]", rcdata, data)
+
+    com = re.compile("\[recent_changes\]")
+    m = com.search(data)
+    if(m):
+        rcdata = requests.get('http://cauis.xyz:3000/recent_changes').text
+        data = re.sub("\[recent_changes\]", rcdata, data)
 
     
     while(1):
