@@ -2892,6 +2892,7 @@ def user_topic_list(name = None, num = 1):
 @route('/recent_changes_plain')
 def recent_changes_plain(name=None, num=1, what='all', tool='record'):
     div = '''
+        <body style="background-color:#FFFFFF;">
         <link rel="stylesheet" href="/views/acme/css/bootstrap.min.css">
         <link rel="stylesheet" href="/views/acme/css/bootstrap-reset.css">
         <link rel="stylesheet" href="/views/acme/css/style.css">
