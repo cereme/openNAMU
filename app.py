@@ -2892,12 +2892,11 @@ def user_topic_list(name = None, num = 1):
 @route('/recent_changes_plain')
 def recent_changes_plain(name=None, num=1, what='all', tool='record'):
     div = '''
-        
+        <html style="background-color:#FFFFFF">
         <link rel="stylesheet" href="/views/acme/css/bootstrap.min.css">
         <link rel="stylesheet" href="/views/acme/css/bootstrap-reset.css">
         <link rel="stylesheet" href="/views/acme/css/style.css">
         <link rel="stylesheet" href="/views/acme/css/style-responsive.css">
-        <body style="background-color:#FFFFFF;color:#FFFFFF;">
     <table style="width: 100%; text-align: center;border:1px solid #ccc;" class="col-md-10 col-md-offset-1 mar-b-30"><tbody>'''
 
     curs.execute("select title, date from history order by date desc limit 50")
@@ -2905,6 +2904,7 @@ def recent_changes_plain(name=None, num=1, what='all', tool='record'):
     div += '<td>문서제목</td><td>수정시간</td>'
     for data in data_list:
         div += '<tr style="border:1px solid #ccc;"><td><a href="/w/%s" target="_top">%s</a></td><td>%s</td></tr>' % (data[0],data[0], data[1])
+    div += '</tbody></table></html>'
     return div
 
 @route('/<tool:re:history|record>/<name:path>', method=['POST', 'GET'])
