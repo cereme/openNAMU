@@ -26,7 +26,7 @@ cmd에 치면 됩니다.
 ### 우분투
  * sudo apt-get install python3-pip
  * pip3 install -r requirements.txt
- 
+ * 참고 sudo apt-get install libffi-dev (cffi 설치오류)
 터미널에 치면 됩니다.
 ### 자세한 설명
  * [참조](http://namu.ml/w/오픈나무%2F설치법)
