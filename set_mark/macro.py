@@ -50,6 +50,7 @@ def savemark(data):
 def macro(data):
     data = savemark(data)
     data = re.sub("\[anchor\((?P<in>[^\[\]]*)\)\]", '<span id="\g<in>"></span>', data)
+    data = re.sub("\[imglink\((?P<in>[^\[\]]*)\)\]", '<img src="\g<in>"/>', data)
     data = re.sub("\[nicovideo\((?P<in>[^,)]*)(?:(?:,(?:[^,)]*))+)?\)\]", "[[http://embed.nicovideo.jp/watch/\g<in>]]", data)
     data = re.sub('\[ruby\((?P<in>[^\,]*)\,\s?(?P<out>[^\)]*)\)\]', '<ruby>\g<in><rp>(</rp><rt>\g<out></rt><rp>)</rp></ruby>', data)
     data = re.sub("\[br\]", '<br>', data)
